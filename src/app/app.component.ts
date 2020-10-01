@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'reactive-form-project-ver2';
   projectDetailsForm: FormGroup;
   statusArray: string[] = ['stable', 'critical', 'finished'];
@@ -15,16 +15,14 @@ export class AppComponent {
   ngOnInit() {
     // initialize project details form,
     this.projectDetailsForm = new FormGroup({
-      projectData: new FormGroup({
-        name: new FormControl(null, this.forbiddenName),
-        email: new FormControl(null),
-        status: new FormControl(this.statusArray[0]),
-      }),
+      projectName: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      projectStatus: new FormControl(this.statusArray[0]),
     });
   }
   // form submit
   onSubmit() {
-    console.log(this.projectDetailsForm.get('projectData.name'));
+    console.log(this.projectDetailsForm.get('name'));
   }
   // validate the project name, not allow name 'Test'
   forbiddenName(arg: FormControl): Promise<any> | Observable<any> {
