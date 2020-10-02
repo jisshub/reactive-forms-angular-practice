@@ -14,12 +14,13 @@ export class AppComponent implements OnInit {
   statusArray: string[] = ['stable', 'critical', 'finished'];
 
   ngOnInit() {
-    // initialize project details form,
+    // Initialize project details form,
     this.projectDetailsForm = new FormGroup({
-      projectName: new FormControl(null, [
-        Validators.required,
-        CustomValidator.invalidProjectName,
-      ]),
+      projectName: new FormControl(
+        null,
+        [Validators.required, CustomValidator.invalidProjectName],
+        CustomValidator.asyncInvalidProjectName
+      ),
       email: new FormControl(null, [Validators.required, Validators.email]),
       projectStatus: new FormControl(this.statusArray[0]),
     });
