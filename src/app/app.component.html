@@ -4,12 +4,12 @@
       <form
         [formGroup]="projectDetailsForm"
         class="pb-5 mb-5"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onSaveProject()"
       >
         <div class="form-group">
           <label for="name">Project Name: </label>
           <input
-            formControlName="name"
+            formControlName="projectName"
             type="text"
             name="name"
             class="form-control"
@@ -36,7 +36,7 @@
             <select
               class="custom-select mr-sm-2"
               id="inlineFormCustomSelect"
-              formControlName="status"
+              formControlName="projectStatus"
             >
               <option *ngFor="let item of statusArray" [ngValue]="item">
                 {{ item }}
