@@ -1,4 +1,6 @@
 import { FormControl } from '@angular/forms';
+import { resolve } from 'dns';
+import { promise } from 'protractor';
 import { Observable } from 'rxjs';
 
 export class CustomValidator {
@@ -26,5 +28,28 @@ export class CustomValidator {
       }, 1500);
     });
     return promise;
+  }
+  // custom validator for email - receive the input as argument
+  static invalidProjectEmail(control: FormControl): any {
+    if (control.value === 'test@test.com') {
+      return { invalidEmail: true };
+    }
+    return null;
+  }
+
+  // using async validator
+  static asyncInvalidEmail(
+    control: FormControl
+  ): Promise<any> | Observable<any> {
+    const promiseVal = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'sample@sample.com') {
+          resolve({ invalidEmail: true });
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+    return promiseVal;
   }
 }

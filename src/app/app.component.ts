@@ -21,7 +21,15 @@ export class AppComponent implements OnInit {
         [Validators.required, CustomValidator.invalidProjectName],
         CustomValidator.asyncInvalidProjectName
       ),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      email: new FormControl(
+        null,
+        [
+          Validators.required,
+          Validators.email,
+          CustomValidator.invalidProjectEmail,
+        ],
+        CustomValidator.asyncInvalidEmail
+      ),
       projectStatus: new FormControl(this.statusArray[0]),
     });
   }
