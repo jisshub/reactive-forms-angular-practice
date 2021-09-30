@@ -1,6 +1,4 @@
 import { FormControl } from '@angular/forms';
-import { resolve } from 'dns';
-import { promise } from 'protractor';
 import { Observable } from 'rxjs';
 
 export class CustomValidator {
@@ -36,7 +34,6 @@ export class CustomValidator {
     }
     return null;
   }
-
   // using async validator
   static asyncInvalidEmail(
     control: FormControl
